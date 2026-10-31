@@ -1,8 +1,20 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>P Vault</title>
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="claude:viewport-fit-sides" content="cover">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>P Vault — private local-first Android vault</title>
+<meta name="description" content="P Vault keeps your important data, reel text, images and PDFs in one private Android app, backed up to your Google Drive.">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://muhammadshanp.github.io/p-vault-website/">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="P Vault — private local-first Android vault">
+<meta property="og:description" content="Keep your important data, reel text, images and PDFs in one private app, backed up to your Google Drive.">
+<meta property="og:url" content="https://muhammadshanp.github.io/p-vault-website/">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -10,6 +22,7 @@
 /* Layout: sticky header, two-column hero (copy + vault app mock), four-up feature grid, Drive backup band, dark download band.
    Concept: the logo's open ring with a coral dot is reused as the page's one recurring motif. */
 :root {
+  color-scheme: light;
   --bg: #F3F4F2;
   --surface: #FFFFFF;
   --fg: #16181D;
@@ -53,7 +66,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
 body {
   background: var(--bg);
   color: var(--fg);
@@ -159,12 +172,13 @@ a { color: inherit; }
 /* Sections */
 section { padding-block: 88px; }
 .sec-head { max-width: 640px; display: grid; gap: 14px; margin-bottom: 48px; }
+.sec-head.tight { margin-bottom: 0; }
 .sec-head h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 700; }
 .sec-head p { color: var(--muted); font-size: 18px; }
 
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px 24px; display: grid; gap: 12px; align-content: start; }
-.card .ico { width: 48px; height: 48px; border-radius: 14px; background: var(--bg); display: grid; place-items: center; margin-bottom: 8px; }
+.card .ico { width: 48px; height: 48px; border-radius: 14px; background: var(--bg); color: var(--fg); display: grid; place-items: center; margin-bottom: 8px; }
 .card h3 { font-size: 22px; font-weight: 600; }
 .card p { color: var(--muted); font-size: 16px; }
 
@@ -178,11 +192,12 @@ section { padding-block: 88px; }
 .steps h3 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
 .steps p { color: var(--muted); font-size: 16px; }
 
-.download { padding-block: 0 88px; }
+.download { padding-block: 88px; }
 .band { background: var(--band-bg); color: var(--band-fg); border-radius: 36px; padding: 64px 48px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; }
 .band h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 700; margin-bottom: 14px; }
 .band p { color: var(--band-muted); font-size: 18px; max-width: 32em; }
 .band .btn-primary { min-height: 56px; padding: 0 32px; font-size: 17px; }
+.band .mark { margin-bottom: 22px; }
 .band .mark .ring { stroke: var(--band-fg); }
 
 footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
@@ -202,6 +217,7 @@ footer .brand { font-size: 18px; color: var(--fg); }
   .hero { padding-block: 48px 64px; }
   .hero .lede { font-size: 18px; }
   section { padding-block: 64px; }
+  .download { padding-block: 64px; }
   .grid { grid-template-columns: minmax(0, 1fr); }
   .band { border-radius: 28px; }
   .device { padding: 16px; border-radius: 30px; }
@@ -211,6 +227,8 @@ footer .brand { font-size: 18px; color: var(--fg); }
   .btn { transition: none; }
 }
 </style>
+</head>
+<body>
 
 <header class="site-header">
   <div class="wrap">
@@ -265,19 +283,19 @@ footer .brand { font-size: 18px; color: var(--fg); }
         <ul class="items" aria-hidden="true">
           <li class="item">
             <span class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
-            <span class="meta"><div class="name">Reel script, product intro</div><div class="sub">Reel text</div></span>
+            <div class="meta"><div class="name">Reel script, product intro</div><div class="sub">Reel text</div></div>
           </li>
           <li class="item">
             <span class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></svg></span>
-            <span class="meta"><div class="name">ID card, front and back</div><div class="sub">Image</div></span>
+            <div class="meta"><div class="name">ID card, front and back</div><div class="sub">Image</div></div>
           </li>
           <li class="item">
             <span class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>
-            <span class="meta"><div class="name">Insurance policy</div><div class="sub">PDF</div></span>
+            <div class="meta"><div class="name">Insurance policy</div><div class="sub">PDF</div></div>
           </li>
           <li class="item">
             <span class="tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
-            <span class="meta"><div class="name">Important notes</div><div class="sub">Data</div></span>
+            <div class="meta"><div class="name">Important notes</div><div class="sub">Data</div></div>
           </li>
         </ul>
         <div class="sync" aria-hidden="true"><span class="dot"></span>Backed up to Google Drive</div>
@@ -294,22 +312,22 @@ footer .brand { font-size: 18px; color: var(--fg); }
       </div>
       <div class="grid">
         <article class="card">
-          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <h3>Important data</h3>
           <p>Save the details you can't afford to lose, and find them again in one place.</p>
         </article>
         <article class="card">
-          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
           <h3>Reel text</h3>
           <p>Store captions, scripts and ideas for your reels so they're ready when you record.</p>
         </article>
         <article class="card">
-          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></svg></span>
+          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></svg></span>
           <h3>Images</h3>
           <p>Keep the photos and scans that matter, such as cards, receipts and proofs.</p>
         </article>
         <article class="card">
-          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>
+          <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>
           <h3>PDFs</h3>
           <p>File away documents, forms and statements as PDFs and open them any time.</p>
         </article>
@@ -324,7 +342,7 @@ footer .brand { font-size: 18px; color: var(--fg); }
         <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
       </svg>
       <div>
-        <div class="sec-head" style="margin-bottom:0">
+        <div class="sec-head tight">
           <span class="label">Google Drive backup</span>
           <h2>If your phone is lost, your vault isn't.</h2>
           <p>P Vault backs up your files to your Google Drive, so a lost, broken or reset phone doesn't take your important things with it.</p>
@@ -338,11 +356,11 @@ footer .brand { font-size: 18px; color: var(--fg); }
     </div>
   </section>
 
-  <div id="download" class="download" style="padding-top:88px">
+  <div id="download" class="download">
     <div class="wrap">
       <div class="band">
         <div>
-          <svg class="mark" width="52" height="52" viewBox="0 0 120 120" aria-hidden="true" style="margin-bottom:22px">
+          <svg class="mark" width="52" height="52" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
             <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
           </svg>
