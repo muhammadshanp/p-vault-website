@@ -226,7 +226,88 @@ footer .brand { font-size: 18px; color: var(--fg); }
   html { scroll-behavior: auto; }
   .btn { transition: none; }
 }
+
+/* ---------- Motion ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes pop-in { from { opacity: 0; transform: translateY(40px) scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes slide-in { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+@keyframes ring-draw { from { stroke-dasharray: 0 213.6; } to { stroke-dasharray: 170 43.6; } }
+@keyframes dot-pop { 0% { transform: scale(0); } 70% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(232, 99, 58, 0.55); } 70%, 100% { box-shadow: 0 0 0 10px rgba(232, 99, 58, 0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes sheen { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(260%) skewX(-20deg); } }
+
+/* Logo mark: ring draws itself, then the coral dot pops in */
+.mark .ring, .ring-art .ring { animation: ring-draw 1.2s cubic-bezier(.65, 0, .35, 1) 0.2s both; }
+.mark circle:not(.ring), .ring-art circle:not(.ring) {
+  transform-box: fill-box; transform-origin: center;
+  animation: dot-pop 0.5s cubic-bezier(.34, 1.56, .64, 1) 1.2s both;
+}
+
+/* Hero entrance */
+.hero .wrap > div:first-child > * { animation: rise 0.8s cubic-bezier(.2, .7, .2, 1) both; }
+.hero .wrap > div:first-child > :nth-child(1) { animation-delay: 0.05s; }
+.hero .wrap > div:first-child > :nth-child(2) { animation-delay: 0.15s; }
+.hero .wrap > div:first-child > :nth-child(3) { animation-delay: 0.28s; }
+.hero .wrap > div:first-child > :nth-child(4) { animation-delay: 0.4s; }
+.hero .wrap > div:first-child > :nth-child(5) { animation-delay: 0.52s; }
+.kinds li { animation: rise 0.6s cubic-bezier(.2, .7, .2, 1) both; }
+.kinds li:nth-child(1) { animation-delay: 0.7s; }
+.kinds li:nth-child(2) { animation-delay: 0.78s; }
+.kinds li:nth-child(3) { animation-delay: 0.86s; }
+.kinds li:nth-child(4) { animation-delay: 0.94s; }
+
+/* App mock: enters, then floats gently */
+.device { animation: pop-in 1s cubic-bezier(.2, .7, .2, 1) 0.3s both, float 7s ease-in-out 1.4s infinite; }
+.device .item { animation: slide-in 0.6s cubic-bezier(.2, .7, .2, 1) backwards; }
+.device .item:nth-child(1) { animation-delay: 0.9s; }
+.device .item:nth-child(2) { animation-delay: 1.05s; }
+.device .item:nth-child(3) { animation-delay: 1.2s; }
+.device .item:nth-child(4) { animation-delay: 1.35s; }
+.device .sync { animation: rise 0.6s ease 1.55s both; }
+.sync .dot { animation: pulse 2s ease-out 2s infinite; }
+.item { transition: transform 0.2s ease, border-color 0.2s ease; }
+.item:hover { transform: translateX(4px); border-color: var(--fg); }
+
+/* Buttons */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-120%) skewX(-20deg); pointer-events: none;
+}
+.btn-primary:hover::after { animation: sheen 0.8s ease; }
+.btn-primary:active { transform: translateY(0) scale(0.98); }
+
+/* Cards, steps */
+.card { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+.card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 22px 40px -28px rgba(22, 24, 29, 0.45); }
+.card .ico { transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), background-color 0.25s ease; }
+.card:hover .ico { transform: scale(1.12) rotate(-6deg); background: var(--accent); color: var(--on-accent); }
+.steps .n { transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+.steps li:hover .n { background: var(--fg); color: var(--bg); transform: scale(1.08); }
+
+/* Backup ring: slow orbit */
+.ring-art { animation: spin 40s linear infinite; }
+.band .mark { animation: breathe 3.5s ease-in-out infinite; }
+
+/* Scroll reveal (only active when JS is running) */
+.js [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
+.js [data-reveal].in { opacity: 1; transform: none; }
+.js .card[data-reveal].in { transition: opacity 0.7s ease var(--d, 0s), transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+.js .card[data-reveal].in:hover { transform: translateY(-6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+@media print {
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -387,4 +468,34 @@ footer .brand { font-size: 18px; color: var(--fg); }
   </div>
 </footer>
 
+<script>
+(function () {
+  var targets = [
+    ['#features .sec-head', 0],
+    ['#features .card', 0.08],
+    ['#backup .ring-art', 0],
+    ['#backup .sec-head', 0],
+    ['#backup .steps li', 0.12],
+    ['.band', 0]
+  ];
+  var els = [];
+  targets.forEach(function (t) {
+    document.querySelectorAll(t[0]).forEach(function (el, i) {
+      el.setAttribute('data-reveal', '');
+      el.style.setProperty('--d', (i * t[1]) + 's');
+      els.push(el);
+    });
+  });
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body></html>
