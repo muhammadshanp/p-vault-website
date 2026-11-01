@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>P Vault - Updates</title>
+<meta name="description" content="Download the latest P Vault APK for Android. Updating keeps your vault, chats, settings and Google Drive backups.">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://muhammadshanp.github.io/p-vault-website/update.html">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #F3F4F2;
+  --surface: #FFFFFF;
+  --fg: #16181D;
+  --muted: #595C62;
+  --line: #DCDEDA;
+  --accent: #E8633A;
+  --accent-text: #B23E17;
+  --on-accent: #16181D;
+  --font-display: 'Bricolage Grotesque', 'Manrope', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111317;
+    --surface: #1A1D23;
+    --fg: #F3F4F2;
+    --muted: #A3A7AE;
+    --line: #2A2E36;
+    --accent-text: #F08A66;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+}
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.025em; line-height: 1.08; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.mark { display: block; flex: none; }
+.mark .ring { stroke: var(--fg); }
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a.link { text-decoration: none; font-weight: 500; font-size: 15px; color: var(--muted); }
+.nav a.link:hover, .nav a.link[aria-current="page"] { color: var(--fg); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 24px;
+  border-radius: 999px; border: 1.5px solid transparent;
+  font-family: var(--font-body); font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
+.btn-ghost:hover { border-color: var(--fg); }
+.btn-sm { min-height: 44px; padding: 0 20px; font-size: 15px; }
+
+.update-hero { padding-block: 72px 64px; }
+.update-hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
+.update-hero h1 { font-size: clamp(40px, 6vw, 66px); font-weight: 700; margin-block: 18px 22px; }
+.update-hero h1 em { font-style: normal; color: var(--accent-text); }
+.lede { font-size: 20px; color: var(--muted); max-width: 35em; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+
+.release-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 32px;
+  box-shadow: 0 30px 60px -38px rgba(22, 24, 29, 0.38);
+}
+.release-card .mark { margin-bottom: 22px; }
+.release-card h2 { font-size: 30px; font-weight: 700; margin-block: 8px 10px; }
+.release-card p { color: var(--muted); font-size: 16px; }
+.release-card .btn { width: 100%; margin-top: 24px; }
+.release-card .small { margin-top: 14px; font-size: 13px; line-height: 1.45; }
+.version { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); }
+
+.install { border-top: 1px solid var(--line); padding-block: 72px 88px; }
+.install .wrap { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 72px; align-items: start; }
+.sec-head { display: grid; gap: 14px; }
+.sec-head h2 { font-size: clamp(30px, 4.2vw, 44px); font-weight: 700; }
+.sec-head p { color: var(--muted); font-size: 18px; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.steps li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start; }
+.steps .n { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--fg); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; font-size: 14px; }
+.steps h3 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.steps p { color: var(--muted); font-size: 16px; }
+.note {
+  grid-column: 1 / -1;
+  margin-top: 18px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.note strong { color: var(--fg); }
+
+footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; color: var(--muted); font-size: 15px; }
+footer .brand { font-size: 18px; color: var(--fg); }
+.contact { overflow-wrap: anywhere; }
+
+@media (max-width: 980px) {
+  .update-hero .wrap, .install .wrap { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .nav a.link { display: none; }
+  .update-hero { padding-block: 48px 56px; }
+  .lede { font-size: 18px; }
+  .release-card { padding: 26px 22px; }
+  .install { padding-block: 56px 64px; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="P Vault home">
+      <svg class="mark" width="36" height="36" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
+        <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
+      </svg>
+      P Vault
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="link" href="index.html#features">What it stores</a>
+      <a class="link" href="index.html#backup">Drive backup</a>
+      <a class="link" href="update.html" aria-current="page">Updates</a>
+      <a class="btn btn-primary btn-sm" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="update-hero">
+    <div class="wrap">
+      <div>
+        <span class="label">App updates</span>
+        <h1>Keep P Vault <em>current.</em></h1>
+        <p class="lede">The newest Android build is always available here. Updating keeps your vault, chats, settings and Google Drive backups exactly as they are.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download the latest APK</a>
+          <a class="btn btn-ghost" href="index.html#features">What P Vault stores</a>
+        </div>
+      </div>
+
+      <aside class="release-card" aria-label="Download P Vault">
+        <svg class="mark" width="54" height="54" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
+          <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
+        </svg>
+        <span class="version">Latest release</span>
+        <h2>P Vault for Android</h2>
+        <p>Android 8.0 or newer. No account needed. Your first backup goes to the Google Drive folder you choose.</p>
+        <a class="btn btn-primary" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download APK</a>
+        <p class="small">The file opens from GitHub, the same place the app checks for new versions.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section class="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Installing</span>
+        <h2 id="install-title">A two-minute update.</h2>
+        <p>Android asks you to confirm the install because the APK comes from outside the Play Store. That is expected.</p>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <span class="n">1</span>
+          <div><h3>Download the APK</h3><p>Tap the download button. The newest P Vault build is fetched from GitHub Releases.</p></div>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <div><h3>Open the file</h3><p>If Android asks, allow your browser to install unknown apps for this one install.</p></div>
+        </li>
+        <li>
+          <span class="n">3</span>
+          <div><h3>Update over the old version</h3><p>Tap Update. Do not uninstall first. Your vault, chats, settings and Drive folder connection stay in place.</p></div>
+        </li>
+      </ol>
+
+      <p class="note"><strong>Your data stays put.</strong> P Vault stores everything on your device and copies backups to the Google Drive folder you picked. Updating the app does not erase either one.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" width="28" height="28" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
+        <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
+      </svg>
+      P Vault
+    </a>
+    <a class="contact" href="mailto:muhammadshanpofficial@gmail.com">Contact: muhammadshanpofficial@gmail.com</a>
+    <span>© 2026 P Vault</span>
+  </div>
+</footer>
+</body>
+</html>
