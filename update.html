@@ -3,17 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>P Vault - Updates</title>
-<meta name="description" content="Download the latest P Vault APK for Android. Updating keeps your vault, chats, settings and Google Drive backups.">
+<meta name="description" content="Download the latest P Vault Android app and see how to update it without losing your vault.">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://muhammadshanp.github.io/p-vault-website/update.html">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="P Vault update">
+<meta property="og:description" content="Download the latest P Vault Android app and update without losing your vault.">
+<meta property="og:url" content="https://muhammadshanp.github.io/p-vault-website/update.html">
+<meta name="twitter:card" content="summary">
+<title>P Vault Update</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
+/* Layout: one narrow column, update-only. Brand bar, version card with the download button, release notes, three install steps. No marketing sections.
+   The open ring with a coral dot stays the one recurring motif. */
 :root {
   color-scheme: light;
   --bg: #F3F4F2;
@@ -24,23 +31,35 @@
   --accent: #E8633A;
   --accent-text: #B23E17;
   --on-accent: #16181D;
+  --ok: #1F7A4D;
   --font-display: 'Bricolage Grotesque', 'Manrope', system-ui, sans-serif;
   --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #111317;
     --surface: #1A1D23;
     --fg: #F3F4F2;
     --muted: #A3A7AE;
     --line: #2A2E36;
     --accent-text: #F08A66;
+    --ok: #5FCB92;
     color-scheme: dark;
   }
 }
+:root[data-theme="dark"] {
+  --bg: #111317;
+  --surface: #1A1D23;
+  --fg: #F3F4F2;
+  --muted: #A3A7AE;
+  --line: #2A2E36;
+  --accent-text: #F08A66;
+  --ok: #5FCB92;
+  color-scheme: dark;
+}
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
 body {
   background: var(--bg);
   color: var(--fg);
@@ -49,14 +68,22 @@ body {
   line-height: 1.6;
   margin: 0;
 }
-h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.025em; line-height: 1.08; margin: 0; text-wrap: balance; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.025em; line-height: 1.1; margin: 0; text-wrap: balance; }
 p { margin: 0; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
 .wrap {
   width: 100%;
-  max-width: 1160px;
+  max-width: 600px;
   margin: 0 auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
@@ -72,178 +99,226 @@ a { color: inherit; }
   color: var(--accent-text);
 }
 
-.site-header {
-  position: sticky;
-  top: env(safe-area-inset-top, 0px);
-  z-index: 20;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-}
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
-.nav { display: flex; align-items: center; gap: 28px; }
-.nav a.link { text-decoration: none; font-weight: 500; font-size: 15px; color: var(--muted); }
-.nav a.link:hover, .nav a.link[aria-current="page"] { color: var(--fg); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 21px; letter-spacing: -0.02em; }
+.bar .tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 48px; padding: 0 24px;
-  border-radius: 999px; border: 1.5px solid transparent;
-  font-family: var(--font-body); font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-.btn-primary { background: var(--accent); color: var(--on-accent); }
+main { padding-block: 40px 56px; }
+main .wrap { display: grid; gap: 44px; }
+
+/* Headline */
+.top { display: grid; gap: 14px; }
+.top h1 { font-size: clamp(36px, 9vw, 52px); font-weight: 700; }
+.top h1 em { font-style: normal; color: var(--accent-text); }
+.top p { color: var(--muted); font-size: 18px; }
+
+/* Version card */
+.vcard { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 26px; display: grid; gap: 18px; box-shadow: 0 24px 50px -34px rgba(22, 24, 29, 0.35); }
+.vrows { display: grid; margin: 0; }
+.vrow { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-block: 13px; border-top: 1px solid var(--line); }
+.vrow:first-child { border-top: 0; padding-top: 0; }
+.vrow dt { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vrow dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; text-align: right; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap: anywhere; }
+.vrow dd.small { font-family: var(--font-body); font-weight: 600; font-size: 16px; letter-spacing: 0; }
+.status { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--bg); font-size: 15px; font-weight: 600; line-height: 1.4; }
+.status .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--muted); flex: none; }
+.status[data-state="new"] .dot { background: var(--accent); }
+.status[data-state="ok"] .dot { background: var(--ok); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 28px; border-radius: 999px; border: 1.5px solid transparent; font-family: var(--font-body); font-weight: 600; font-size: 17px; text-decoration: none; cursor: pointer; transition: transform 0.15s ease; }
+.btn-primary { background: var(--accent); color: var(--on-accent); width: 100%; }
 .btn-primary:hover { transform: translateY(-2px); }
-.btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-ghost { border-color: var(--line); color: var(--fg); min-height: 44px; font-size: 15px; padding: 0 20px; }
 .btn-ghost:hover { border-color: var(--fg); }
-.btn-sm { min-height: 44px; padding: 0 20px; font-size: 15px; }
+.vfoot { font-size: 13px; color: var(--muted); text-align: center; margin-top: -6px; }
 
-.update-hero { padding-block: 72px 64px; }
-.update-hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
-.update-hero h1 { font-size: clamp(40px, 6vw, 66px); font-weight: 700; margin-block: 18px 22px; }
-.update-hero h1 em { font-style: normal; color: var(--accent-text); }
-.lede { font-size: 20px; color: var(--muted); max-width: 35em; }
-.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+/* Blocks */
+.block { display: grid; gap: 18px; }
+.block h2 { font-size: 26px; font-weight: 700; }
+.notes { display: grid; gap: 14px; }
+.notes ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.notes li { position: relative; padding-left: 26px; overflow-wrap: anywhere; }
+.notes li::before { content: ""; position: absolute; left: 2px; top: 0.62em; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); }
+.notes p { color: var(--muted); overflow-wrap: anywhere; }
+.notes h4 { font-family: var(--font-display); font-size: 18px; margin: 0; }
+.notes .when { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.notes-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-.release-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 30px;
-  padding: 32px;
-  box-shadow: 0 30px 60px -38px rgba(22, 24, 29, 0.38);
-}
-.release-card .mark { margin-bottom: 22px; }
-.release-card h2 { font-size: 30px; font-weight: 700; margin-block: 8px 10px; }
-.release-card p { color: var(--muted); font-size: 16px; }
-.release-card .btn { width: 100%; margin-top: 24px; }
-.release-card .small { margin-top: 14px; font-size: 13px; line-height: 1.45; }
-.version { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); }
-
-.install { border-top: 1px solid var(--line); padding-block: 72px 88px; }
-.install .wrap { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 72px; align-items: start; }
-.sec-head { display: grid; gap: 14px; }
-.sec-head h2 { font-size: clamp(30px, 4.2vw, 44px); font-weight: 700; }
-.sec-head p { color: var(--muted); font-size: 18px; }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
-.steps li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start; }
-.steps .n { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--fg); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; font-size: 14px; }
-.steps h3 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; align-items: start; }
+.steps .n { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--fg); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; font-size: 14px; }
+.steps h3 { font-size: 19px; font-weight: 600; margin-bottom: 2px; }
 .steps p { color: var(--muted); font-size: 16px; }
-.note {
-  grid-column: 1 / -1;
-  margin-top: 18px;
-  padding: 18px 20px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  color: var(--muted);
-  font-size: 15px;
-}
-.note strong { color: var(--fg); }
+.tip { border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; color: var(--muted); font-size: 15px; background: var(--surface); }
+.tip b { color: var(--fg); font-weight: 600; }
 
-footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
-footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; color: var(--muted); font-size: 15px; }
-footer .brand { font-size: 18px; color: var(--fg); }
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 .contact { overflow-wrap: anywhere; }
 
-@media (max-width: 980px) {
-  .update-hero .wrap, .install .wrap { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes ring-draw { from { stroke-dasharray: 0 213.6; } to { stroke-dasharray: 170 43.6; } }
+@keyframes dot-pop { 0% { transform: scale(0); } 70% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(232, 99, 58, 0.55); } 70%, 100% { box-shadow: 0 0 0 10px rgba(232, 99, 58, 0); } }
+.mark .ring { animation: ring-draw 1.2s cubic-bezier(.65, 0, .35, 1) 0.2s both; }
+.mark circle:not(.ring) { transform-box: fill-box; transform-origin: center; animation: dot-pop 0.5s cubic-bezier(.34, 1.56, .64, 1) 1.2s both; }
+.top, .vcard { animation: rise 0.7s cubic-bezier(.2, .7, .2, 1) both; }
+.vcard { animation-delay: 0.15s; }
+.status[data-state="new"] .dot { animation: pulse 2s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
-  .nav a.link { display: none; }
-  .update-hero { padding-block: 48px 56px; }
-  .lede { font-size: 18px; }
-  .release-card { padding: 26px 22px; }
-  .install { padding-block: 56px 64px; }
+  main { padding-block: 28px 44px; }
+  .vcard { padding: 22px 20px; border-radius: 24px; }
 }
 </style>
 </head>
 <body>
-<header class="site-header">
+<header class="bar">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="P Vault home">
-      <svg class="mark" width="36" height="36" viewBox="0 0 120 120" aria-hidden="true">
+    <a class="brand" href="./" aria-label="P Vault home">
+      <svg class="mark" width="34" height="34" viewBox="0 0 120 120" aria-hidden="true">
         <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
         <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
       </svg>
       P Vault
     </a>
-    <nav class="nav" aria-label="Main">
-      <a class="link" href="index.html#features">What it stores</a>
-      <a class="link" href="index.html#backup">Drive backup</a>
-      <a class="link" href="update.html" aria-current="page">Updates</a>
-      <a class="btn btn-primary btn-sm" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download</a>
-    </nav>
+    <span class="tag">Update</span>
   </div>
 </header>
 
-<main id="top">
-  <div class="update-hero">
-    <div class="wrap">
-      <div>
-        <span class="label">App updates</span>
-        <h1>Keep P Vault <em>current.</em></h1>
-        <p class="lede">The newest Android build is always available here. Updating keeps your vault, chats, settings and Google Drive backups exactly as they are.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download the latest APK</a>
-          <a class="btn btn-ghost" href="index.html#features">What P Vault stores</a>
-        </div>
-      </div>
+<main>
+  <div class="wrap">
+    <div class="top">
+      <span class="label">App update</span>
+      <h1 id="headline">Update <em>P Vault.</em></h1>
+      <p id="lede">Install the newest version over your current app. Your vault and Google Drive backup stay as they are.</p>
+    </div>
 
-      <aside class="release-card" aria-label="Download P Vault">
-        <svg class="mark" width="54" height="54" viewBox="0 0 120 120" aria-hidden="true">
-          <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
-          <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
-        </svg>
-        <span class="version">Latest release</span>
-        <h2>P Vault for Android</h2>
-        <p>Android 8.0 or newer. No account needed. Your first backup goes to the Google Drive folder you choose.</p>
-        <a class="btn btn-primary" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download APK</a>
-        <p class="small">The file opens from GitHub, the same place the app checks for new versions.</p>
-      </aside>
+    <div class="vcard" aria-live="polite">
+      <dl class="vrows">
+        <div class="vrow"><dt>Latest</dt><dd id="v-latest">Checking…</dd></div>
+        <div class="vrow"><dt>Installed</dt><dd id="v-current" class="small">Check in the app</dd></div>
+        <div class="vrow"><dt>Released</dt><dd id="v-date" class="small">See release notes</dd></div>
+      </dl>
+      <div class="status" id="status" data-state="idle"><span class="dot"></span><span id="status-text">Checking for the newest version.</span></div>
+      <a class="btn btn-primary" id="dl-card" href="https://github.com/muhammadshanp/p-vault/releases/latest/download/P-Vault.apk">Download update</a>
+      <p class="vfoot">P-Vault.apk for Android, from GitHub Releases</p>
+    </div>
+
+    <div class="block">
+      <h2>What's new</h2>
+      <div class="notes">
+        <span class="when" id="notes-when"></span>
+        <div id="notes-body"><p>The changes for every version are listed on the GitHub release page.</p></div>
+        <div class="notes-actions"><a class="btn btn-ghost" href="https://github.com/muhammadshanp/p-vault/releases/latest">Read release notes</a></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>How to update</h2>
+      <ol class="steps">
+        <li><span class="n">1</span><div><h3>Download the APK</h3><p>Tap Download update. Your browser saves P-Vault.apk to Downloads.</p></div></li>
+        <li><span class="n">2</span><div><h3>Open it and tap Update</h3><p>If Android asks, allow your browser to install apps, then tap Update. Do not uninstall the old app first.</p></div></li>
+        <li><span class="n">3</span><div><h3>Open P Vault</h3><p>Your data, reel text, images and PDFs are right where you left them.</p></div></li>
+      </ol>
+      <p class="tip"><b>Before you start,</b> check that your last backup to Google Drive has finished.</p>
     </div>
   </div>
-
-  <section class="install" aria-labelledby="install-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Installing</span>
-        <h2 id="install-title">A two-minute update.</h2>
-        <p>Android asks you to confirm the install because the APK comes from outside the Play Store. That is expected.</p>
-      </div>
-
-      <ol class="steps">
-        <li>
-          <span class="n">1</span>
-          <div><h3>Download the APK</h3><p>Tap the download button. The newest P Vault build is fetched from GitHub Releases.</p></div>
-        </li>
-        <li>
-          <span class="n">2</span>
-          <div><h3>Open the file</h3><p>If Android asks, allow your browser to install unknown apps for this one install.</p></div>
-        </li>
-        <li>
-          <span class="n">3</span>
-          <div><h3>Update over the old version</h3><p>Tap Update. Do not uninstall first. Your vault, chats, settings and Drive folder connection stay in place.</p></div>
-        </li>
-      </ol>
-
-      <p class="note"><strong>Your data stays put.</strong> P Vault stores everything on your device and copies backups to the Google Drive folder you picked. Updating the app does not erase either one.</p>
-    </div>
-  </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="index.html">
-      <svg class="mark" width="28" height="28" viewBox="0 0 120 120" aria-hidden="true">
-        <circle class="ring" cx="60" cy="60" r="34" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="170 43.6"/>
-        <circle cx="87.2" cy="39.6" r="8" fill="#E8633A"/>
-      </svg>
-      P Vault
-    </a>
-    <a class="contact" href="mailto:muhammadshanpofficial@gmail.com">Contact: muhammadshanpofficial@gmail.com</a>
+    <a class="contact" href="mailto:muhammadshanpofficial@gmail.com">Help: muhammadshanpofficial@gmail.com</a>
     <span>© 2026 P Vault</span>
   </div>
 </footer>
-</body>
-</html>
+
+<script>
+(function () {
+  var API = 'https://api.github.com/repos/muhammadshanp/p-vault/releases/latest';
+  var $ = function (id) { return document.getElementById(id); };
+
+  function parseVer(s) {
+    var m = String(s || '').match(/(\d+)(?:\.(\d+))?(?:\.(\d+))?/);
+    return m ? [+m[1], +(m[2] || 0), +(m[3] || 0)] : null;
+  }
+  function cmp(a, b) {
+    for (var i = 0; i < 3; i++) { if (a[i] !== b[i]) return a[i] < b[i] ? -1 : 1; }
+    return 0;
+  }
+  function setStatus(state, text) {
+    $('status').setAttribute('data-state', state);
+    $('status-text').textContent = text;
+  }
+
+  // The app can open this page as update.html?v=1.2.0 to pass the installed version.
+  var q = new URLSearchParams(location.search);
+  var current = q.get('v') || q.get('version') || q.get('current');
+  if (current) { $('v-current').textContent = 'v' + current.replace(/^v/i, ''); }
+
+  function renderNotes(body) {
+    var box = $('notes-body');
+    var lines = String(body || '').split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+    if (!lines.length) { return; }
+    box.textContent = '';
+    var ul = null;
+    lines.slice(0, 40).forEach(function (l) {
+      var bullet = l.match(/^[-*+]\s+(.*)$/);
+      var head = l.match(/^#{1,6}\s+(.*)$/);
+      if (bullet) {
+        if (!ul) { ul = document.createElement('ul'); box.appendChild(ul); }
+        var li = document.createElement('li');
+        li.textContent = bullet[1].replace(/[*_`]/g, '');
+        ul.appendChild(li);
+      } else {
+        ul = null;
+        var el = document.createElement(head ? 'h4' : 'p');
+        el.textContent = (head ? head[1] : l).replace(/[*_`]/g, '');
+        box.appendChild(el);
+      }
+    });
+  }
+
+  function showFallback() {
+    $('v-latest').textContent = 'Latest';
+    setStatus('idle', 'Could not check the version just now. The download below is always the newest.');
+  }
+
+  if (!window.fetch) { showFallback(); return; }
+
+  fetch(API, { headers: { 'Accept': 'application/vnd.github+json' } })
+    .then(function (r) { if (!r.ok) { throw new Error(r.status); } return r.json(); })
+    .then(function (rel) {
+      var tag = rel.tag_name || rel.name || '';
+      var latest = parseVer(tag);
+      $('v-latest').textContent = tag ? 'v' + String(tag).replace(/^v/i, '') : 'Latest';
+      var d = rel.published_at ? new Date(rel.published_at) : null;
+      var dateText = d && !isNaN(d) ? d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+      if (dateText) { $('v-date').textContent = dateText; $('notes-when').textContent = 'Released ' + dateText; }
+      renderNotes(rel.body);
+
+      var asset = (rel.assets || []).filter(function (a) { return /\.apk$/i.test(a.name); })[0];
+      if (asset && asset.browser_download_url) { $('dl-card').href = asset.browser_download_url; }
+
+      var cur = current ? parseVer(current) : null;
+      if (cur && latest) {
+        if (cmp(cur, latest) < 0) {
+          setStatus('new', 'An update is available.');
+          $('headline').innerHTML = 'Update <em>available.</em>';
+        } else {
+          setStatus('ok', 'You are on the latest version.');
+          $('headline').innerHTML = 'You are <em>up to date.</em>';
+          $('dl-card').textContent = 'Download again';
+        }
+      } else {
+        setStatus('idle', 'Compare the latest version with the one in your app.');
+      }
+    })
+    .catch(showFallback);
+})();
+</script>
+</body></html>
